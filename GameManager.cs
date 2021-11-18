@@ -12,15 +12,14 @@ public class GameManager : MonoBehaviour
 
     private float countDown = 5f;   //カウントダウン
     private int ballCount = 0;      //ボールの数
-    private bool startText;
-    private bool countDownText;
-    private bool waveTwo;
-    private bool waveThree;
-    private bool waveFour;
-    private bool waveText;
-    private bool waveText3;
-    private bool waveText4;
-    private bool waveStart;
+    private bool startText;         //STARTの表示判定
+    private bool countDownText;     //カウントダウン表示判定
+    private bool waveTwo;           //wave2判定
+    private bool waveThree;         //wave3判定
+    private bool waveFour;          //wave4判定（現在はエンド判定）
+    private bool waveText2;         //wave2開始表示
+    private bool waveText3;         //wave3開始表示
+    private bool waveText4;         //wave4開始表示(現在はCLEAR表示)
 
     //Wave数の表示用の変数
     UiScript waveUi;
@@ -28,7 +27,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //一時停止を解除する処理
         Time.timeScale = 1f;
+
         //Wave数表示
         waveUi = GameObject.Find("Canvas").GetComponent<UiScript>();
     }
@@ -37,15 +38,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
          
-
+        //カウントダウンテキストの表示
         if (countDown > 0.5) {
-
+        
            countDown -= Time.deltaTime;
            CountText.text = countDown.ToString("f0");
 
          }
 
-        
+        //スタートテキストの表示
         if (countDown <= 0.5f && !startText) {
 
             startText = true;
@@ -55,24 +56,28 @@ public class GameManager : MonoBehaviour
 
         }
 
+        //wave1のボール(15個)が消えたらwave2をTrue
         if (ballCount == 15) {
 
             waveTwo = true;
             
         }
 
+        //wave2開始
         if (waveTwo) {
             
             waveTwo = false;
 
-            if (!waveText) {
+            //wave2カウントダウン
+            if (!waveText2) {
 
                 countDown = 6f;
-                waveText = true;
+                waveText2 = true;
                 waveUi.AddWave();
 
             }
 
+            //wave2テキスト表示
             if (countDown > 0.5f) {
                 CountText.enabled = true;
                 countDown -= Time.deltaTime;                
@@ -81,6 +86,7 @@ public class GameManager : MonoBehaviour
 
             }
 
+            //スタートテキスト表示
             if (countDown <= 0.5f) {
                 CountText.text = "S T A R T ！";
                 Invoke("Delay", 1.0f);
@@ -89,16 +95,18 @@ public class GameManager : MonoBehaviour
 
         }
 
+        //wave2のボール(40個)が消えたらwave3をTrue
         if (ballCount == 40) {
 
             waveThree = true;
         }
 
+        //wave3開始
         if (waveThree) {
 
             waveThree = false;
                         
-
+            //wave3カウントダウン表示
             if (!waveText3) {
                 
                 countDown = 6f;
@@ -107,6 +115,7 @@ public class GameManager : MonoBehaviour
 
             }
 
+            //wave3テキスト表示
             if (countDown > 0.5f) {
                 CountText.enabled = true;
                 countDown -= Time.deltaTime;
@@ -115,7 +124,8 @@ public class GameManager : MonoBehaviour
 
 
             }
-
+            
+            //スタートテキスト表示
             if (countDown <= 0.5f) {
                 CountText.text = "S T A R T ！";
                 Invoke("Delay", 1.0f);
@@ -123,12 +133,14 @@ public class GameManager : MonoBehaviour
 
         }
 
+        //wave3のボール(80個)消えたらwave4開始(現在はエンド処理)
         if (ballCount == 80) {
 
             waveFour = true;
 
         }
 
+        //wave4開始(現在はエンド)
         if (waveFour) {
 
             waveFour = false;
@@ -140,6 +152,7 @@ public class GameManager : MonoBehaviour
                 
             }
 
+            //エンドテキスト表示
             if (countDown > 0.5f) {
 
                 CountText.enabled = true;
@@ -149,6 +162,7 @@ public class GameManager : MonoBehaviour
                 
             }
 
+            //EndSceneに遷移
             if (countDown <= 0.5f) {
                 Invoke("Delay", 1.0f);
                 SceneManager.LoadScene("EndScene");
@@ -159,23 +173,10 @@ public class GameManager : MonoBehaviour
 
     }
 
-
-
-    void Delay() {
-
-        CountText.enabled = false;
-    }
-
+    //GameManager用 ボールの消えた数をカウントするメソッド
     public void GameAdmin() {
 
         ballCount += 1;
-        Debug.Log(ballCount);
 
-    }
-
-    private IEnumerator DelayMethod(float waitTime, System.Action action) {
-
-         yield return new WaitForSeconds(waitTime);
-         action();
     }
 }

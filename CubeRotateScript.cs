@@ -13,6 +13,7 @@ public class CubeRotateScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //オブジェクトの回転
         transform.Rotate(1f, 0f, 2.5f);
     }
 }

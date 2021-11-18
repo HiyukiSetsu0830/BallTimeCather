@@ -6,22 +6,12 @@ using UnityEngine.SceneManagement;
 public class RetryScript : MonoBehaviour
 {
 
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //リトライボタンを押された場合
     public void RetryButton() {
 
+        //スコア数を0にする
         UiScript.setScore();
+        //MainSceneに遷移
         SceneManager.LoadScene("MainScene");
 
     }

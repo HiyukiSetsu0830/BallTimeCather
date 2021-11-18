@@ -4,22 +4,10 @@ using UnityEngine;
 
 public class EndButtonScript : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+  
     public void EndButton() {
 
-        
+        //アプリケーションの終了
         Application.Quit();
 
     }

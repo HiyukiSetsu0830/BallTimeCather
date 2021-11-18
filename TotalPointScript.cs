@@ -6,17 +6,12 @@ using UnityEngine.UI;
 public class TotalPointScript : MonoBehaviour
 {
     private int score = 0; //スコア
-    [SerializeField] Text TotalText;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    [SerializeField] Text TotalText;    //トータルスコアの変数
+    
     // Update is called once per frame
     void Update()
     {
-
+        //トータルのスコアを代入
         score = UiScript.getScore();
         this.TotalText.text = "スコア：" + score.ToString("f0");
 

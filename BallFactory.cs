@@ -6,17 +6,11 @@ using UnityEngine.UI;
 public class BallFactory : MonoBehaviour
 {
 
-    [SerializeField] GameObject Ball;
-    [SerializeField] GameObject StopBall;
-    private Rigidbody rb;
-    private Rigidbody rbStop;
-    Coroutine coroutine;
+    [SerializeField] GameObject Ball;   //Ballオブジェクト
+    private Rigidbody rb;               //RigidBody変数
 
-    private float countDown = 5f;
-    private float TimeLine = 0f;
-    private bool firstshot;
-    
-
+    private float countDown = 5f;   //カウントダウン
+    private float TimeLine = 0f;    //ボールのタイムライン  
 
     //Wave管理
     private bool boolAdmin = false;
@@ -44,7 +38,7 @@ public class BallFactory : MonoBehaviour
     private bool ballShot14 = false;
     private bool ballShot15 = false;
 
-    //wave2
+    //wave2ボール管理
     private bool ballShot16 = false;
     private bool ballShot17 = false;
     private bool ballShot18 = false;
@@ -71,7 +65,7 @@ public class BallFactory : MonoBehaviour
     private bool ballShot39 = false;
     private bool ballShot40 = false;
 
-    //Wave3
+    //Wave3ボール管理
     private bool ballShot41 = false;
     private bool ballShot42 = false;
     private bool ballShot43 = false;
@@ -118,27 +112,26 @@ public class BallFactory : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
 
+        //RigidBodyコンポーネント代入
         rb = GetComponent<Rigidbody>();
-        rbStop = StopBall.GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame
     void Update() {
 
-        
-
         TimeLine += Time.deltaTime;
-       
 
-
+        
         /**************************************************************
          *------------------------Wave1-------------------------------*
          **************************************************************/
 
 
-        //1Wave
+        //Wave1のボール出力
         if (!isBall) {
 
+            //1個目
             if (TimeLine >= 6.5f && !ballShot) {
 
                 ballShot = true;
@@ -146,6 +139,7 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //2個目
             if (TimeLine >= 10f && !ballShot2) {
 
                 ballShot2 = true;
@@ -153,6 +147,7 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //3個目
             if (TimeLine >= 11f && !ballShot3) {
 
                 ballShot3 = true;
@@ -160,6 +155,7 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //4個目
             if (TimeLine >= 12f && !ballShot4) {
 
                 ballShot4 = true;
@@ -167,12 +163,14 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //5個目
             if (TimeLine >= 15f && !ballShot5) {
                 ballShot5 = true;
 
                 Instantiate(Ball, new Vector3(-5f, 22.0f, 14.6f), Quaternion.identity);
             }
 
+            //6個目
             if (TimeLine >= 16.5f && !ballShot6) {
 
                 ballShot6 = true;
@@ -180,6 +178,7 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //7個目
             if (TimeLine >= 18.0f && !ballShot7) {
 
                 ballShot7 = true;
@@ -187,6 +186,7 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //8個目
             if (TimeLine >= 19.0f && !ballShot8) {
 
                 ballShot8 = true;
@@ -194,12 +194,14 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //9個目
             if (TimeLine >= 20.0f && !ballShot9) {
 
                 ballShot9 = true;
                 Instantiate(Ball, new Vector3(0f, 22.0f, 14.6f), Quaternion.identity);
             }
 
+            //10個目
             if (TimeLine >= 21.0f && !ballShot10) {
 
                 ballShot10 = true;
@@ -207,13 +209,15 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //11個目
             if (TimeLine >= 22.0f && !ballShot11) {
 
                 ballShot11 = true;
                 Instantiate(Ball, new Vector3(-2f, 22.0f, 14.6f), Quaternion.identity);
 
             }
-
+            
+            //12個目
             if (TimeLine >= 23.0f && !ballShot12) {
 
                 ballShot12 = true;
@@ -221,6 +225,7 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //13個目
             if (TimeLine >= 24.0f && !ballShot13) {
 
                 ballShot13 = true;
@@ -228,12 +233,14 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //14個目
             if (TimeLine >= 26.5f && !ballShot14) {
 
                 ballShot14 = true;
                 Instantiate(Ball, new Vector3(-5f, 22.0f, 14.6f), Quaternion.identity);
             }
 
+            //15個目
             if (TimeLine >= 28.5f && !ballShot15) {
 
                 ballShot15 = true;
@@ -241,12 +248,13 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //Wave切替
             if (TimeLine >= 30.0f && !boolAdmin) {
-                
+
                 boolAdmin = true;
                 isBall = true;
                 isBall2 = false;
-               
+
             }
         }
 
@@ -449,6 +457,7 @@ public class BallFactory : MonoBehaviour
 
             }
 
+            //Wave切替
             if (TimeLine >= 60.0f && !boolAdmin2) {
 
                 boolAdmin2 = true;
@@ -531,7 +540,7 @@ public class BallFactory : MonoBehaviour
 
                 ballShot49 = true;
                 Instantiate(Ball, new Vector3(-6f, 22.0f, 14.6f), Quaternion.identity);
-                               
+
             }
 
             //50個目
@@ -785,12 +794,4 @@ public class BallFactory : MonoBehaviour
 
         }
     }
-
-    private IEnumerator DelayMethod(float waitTime, System.Action action) {
-
-        yield return new WaitForSeconds(waitTime);
-        action();
-
-    }
-
 }
