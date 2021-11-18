@@ -179,4 +179,9 @@ public class GameManager : MonoBehaviour
         ballCount += 1;
 
     }
+
+    public void Delay() {
+
+        CountText.enabled = false;
+    }
 }
