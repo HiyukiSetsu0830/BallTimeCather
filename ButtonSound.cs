@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class ButtonSound : MonoBehaviour
 {
-    private AudioSource buttonSound;
+    private AudioSource buttonSound;    //AudioSource変数
+
     // Start is called before the first frame update
     void Start()
     {
+        //AudioSourceコンポーネント代入
         buttonSound = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void isSound() {
 
+        //SEを鳴らす
         buttonSound.PlayOneShot(buttonSound.clip);
 
     }

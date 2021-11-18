@@ -5,21 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class TitleScript : MonoBehaviour
 {
-
-
-    // Start is called before the first frame update
-    void Start() {
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
-
+    //タイトルボタンを押された場合
     public void TitleButton() {
 
+        //スコアを0にする
         UiScript.setScore();
+        //TitleSceneに遷移
         SceneManager.LoadScene("TitleScene");
 
     }
